@@ -11,8 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-
       models.Pet.belongsTo(models.User,{foreignKey: 'userId'});
+      // foreign key is the key that is foreign to the other individual, which in this case is the toy
+      // so whenever the toy sees the foreign key petId and vice versa, it knows what to do
+      // essentially linking them together 
+      models.Pet.belongsToMany(models.Toy,{through: 'PetsToys', foreignKey: 'petId'});
     }
   };
   Pet.init({
